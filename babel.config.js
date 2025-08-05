@@ -7,6 +7,9 @@ module.exports = function (api) {
     // transformed into ESM default exports, which can cause runtime errors
     // such as "_interopRequireDefault is not a function" on web.
     sourceType: 'unambiguous',
-    plugins: [],
+
+    // Ensure runtime helpers are loaded using CommonJS to avoid interop issues
+    // when Metro bundles @babel/runtime for the web platform.
+    plugins: [['@babel/plugin-transform-runtime', { useESModules: false }]],
   };
 };
